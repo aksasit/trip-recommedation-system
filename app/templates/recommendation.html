@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Recommendation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .wrapper {
+            padding: 60px 20px;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        h1 {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            font-weight: 300;
+            opacity: 0.85;
+            margin-bottom: 40px;
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: none;
+            padding: 10px 15px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0 0 10px rgba(118, 75, 162, 0.6);
+        }
+
+        .btn-modern {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-modern:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(118, 75, 162, 0.6);
+        }
+
+        /* Recommendation Cards */
+        .recommendation-card {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .recommendation-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .recommendation-card h5 {
+            font-weight: 600;
+        }
+
+        .badge-modern {
+            background: #764ba2;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        .popularity-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .glass-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container wrapper">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+
+            <div class="glass-card">
+                <h1 class="text-center">AI Travel Recommendation</h1>
+                <p class="text-center subtitle">
+                    Personalized destination suggestions powered by Machine Learning
+                </p>
+
+                <form action="/recommend" method="POST">
+
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label>User ID</label>
+                            <input type="number" name="user_id" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Destination Name</label>
+                            <select name="name" class="form-select" required>
+                                <option value="">Select</option>
+                                <option value="Jaipur City">Jaipur City</option>
+                                <option value="Taj Mahal">Taj Mahal</option>
+                                <option value="Kerala Backwaters">Kerala Backwaters</option>
+                                <option value="Goa Beaches">Goa Beaches</option>
+                                <option value="Leh Ladakh">Leh Ladakh</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Type</label>
+                            <select name="type" class="form-select" required>
+                                <option value="">Select</option>
+                                <option value="City">City</option>
+                                <option value="Historical">Historical</option>
+                                <option value="Nature">Nature</option>
+                                <option value="Beach">Beach</option>
+                                <option value="Adventure">Adventure</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>State</label>
+                            <select name="state" class="form-select" required>
+                                <option value="">Select</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Best Time</label>
+                            <select name="best_time" class="form-select" required>
+                                <option value="">Select</option>
+                                <option value="Oct-Mar">Oct-Mar</option>
+                                <option value="Nov-Feb">Nov-Feb</option>
+                                <option value="Sep-Mar">Sep-Mar</option>
+                                <option value="Nov-Mar">Nov-Mar</option>
+                                <option value="Apr-Jun">Apr-Jun</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Preferences</label>
+                            <select name="preferences" class="form-select" required>
+                                <option value="">Select</option>
+                                <option value="City, Historical">City, Historical</option>
+                                <option value="Nature, Adventure">Nature, Adventure</option>
+                                <option value="Beaches, Historical">Beaches, Historical</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Gender</label>
+                            <select name="gender" class="form-select" required>
+                                <option value="">Select</option>
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Adults</label>
+                            <input type="number" name="adults" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Children</label>
+                            <input type="number" name="children" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-modern">
+                            Get Recommendations →
+                        </button>
+                    </div>
+
+                </form>
+
+                <!-- Results Section -->
+                {% if predicted_popularity %}
+                <hr class="my-5">
+
+                <h3 class="text-center mb-4">Top Recommended Destinations</h3>
+
+                {% for destination in recommended_destinations %}
+                <div class="recommendation-card">
+                    <h5>{{ destination.Name }}</h5>
+                    <p>
+                        <span class="badge-modern">{{ destination.State }}</span>
+                        <span class="badge-modern">{{ destination.Type }}</span>
+                        <span class="badge-modern">{{ destination.BestTimeToVisit }}</span>
+                    </p>
+                    <p>Popularity Score: <strong>{{ destination.Popularity }}</strong></p>
+                </div>
+                {% endfor %}
+
+                <div class="popularity-box">
+                    <strong>Predicted Popularity Score:</strong>
+                    {{ predicted_popularity }}
+                </div>
+
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
