@@ -5,7 +5,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from pathlib import Path
 
 # Paths
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 MODEL_PATH = BASE_DIR / "models/model.pkl"
 ENCODER_PATH = BASE_DIR / "models/label_encoders.pkl"
 

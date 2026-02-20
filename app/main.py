@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi import Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-# from app.routes import recommendation
+from app.routes import recommendation
 
 app = FastAPI(
     title='Trip Recommendation System',
@@ -14,6 +14,9 @@ app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 # Templates
 templates = Jinja2Templates(directory="app/templates")
+
+# Include Routes
+app.include_router(recommendation.router)
 
 @app.get("/")
 async def home(request: Request):
